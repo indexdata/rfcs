@@ -75,3 +75,4 @@ A detailed RFC and ADR is made with guide to recognise and communicate probable 
 
 - Guide to the Behavioral changes.
 - What kind of change is dropping a minor/patch version of a runtime dependency? (Note that a dev doesn’t get to set the java version of the platform because container config happens independent of module development)
+- How to provide a clear guidance as to how the proposal should be implemented
