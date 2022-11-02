@@ -8,12 +8,12 @@
 
 ## Summary
 
-This RFC's purpose is to deliver to developers and other effected groups a classification of changes within Folio either as a breaking change or otherwise.
+This RFC's purpose is to deliver to developers and other effected groups a guide of changes within Folio either as a breaking change or otherwise.
 
 ## Motivation
 
 - To help different Folio implementors know with every release what significant changes have been added.
-- Classification of those significant changes into breaking and non-breaking changes.
+- An extensive guide of those significant changes grouping them into breaking and non-breaking changes.
 
 ## Detailed Explanation/Design
 
@@ -25,10 +25,13 @@ The RFC aims to classify the changes made at the folio module and interface leve
 
 #### __What constitutes as a breaking change ?__
 
+Throughout this RFC we will be discussing about changes in terms of the following three categories
+
 - What is a breaking change at module level?
 - What is a breaking change at the interface level?
+- What constitutes as a breaking change in the behavioral level? 
 
-#### __Classifying the breaking changes.__
+#### __Guide to what constitutes as breaking changes.__
 
 - Module Version(versioned independent of the interface):
     - What is a breaking change with respect to a module version change ?
@@ -39,29 +42,36 @@ The RFC aims to classify the changes made at the folio module and interface leve
             - Change in public routes.
         - In Backend modules :
             - Changes to both required and optional interface dependencies - eg. dropping support for an interface version, i.e., replacing __version 3.2__ with __version 3.3__ is a breaking change
-            - 
+            - Removing any interface is considered a breaking change.
+            - Changing the minor version of an interface is also considered as a breaking change.
+            - New operational requirement (e.g. requiring postgres or kafka) is a breaking change (mod-authtoken used to be self contained but now requires DB storage)
+            - With respect to Okapi version change a new minimum version change is considered a breaking change as well as a new interface addition is also considered a breaking change
+        - It is also considered as a breakinch when there is a major change within in an interface
+        - If a module stops providing an interface, is also considered as a breaking change
+        - Runtime environment changes are also breaking changes.
 
+- Things to consider:
+    - The language here needs to be fleshed out with examples and reasoning, i.e. there is both a functional API (the provided interfaces) and an operational API (the runtime requirements) and changes to either of these must be reflected in a module’s semver. NB: make a general statement about the goal here, and then provide select examples). ()
+    - Three kinds of breaking changes?
+        - Infrastructural change : eg. modules requires Kafka, Postgres, etc.
+        - Non-infrastructural changes: eg. modules need Java v17, Node v16, etc.
+        - Configurational changes: eg. change to environmental variables.
+
+
+#### __Guide to what constitutes as non-breaking changes.__
 
 
 
 
 ## Risks and Drawbacks
 
-Why should we not do this? 
+#### __Risk Scenarios__ 
 
-A genuine and thoughtful consideration to risks and drawbacks is essential for a well-rounded proposal. 
+A detailed RFC and ADR is made with guide to recognise and communicate probable breaking changes to the effected developers, etc, but  after all these efforts, the guide is used by no-one. 
 
 ## Rationale and Alternatives
 
-Why is this design the best in the space of possible designs? How does this design integrate (or not) into the existing architecture and practices in Folio?
-
-
-What other designs have been considered and what is the rationale for not choosing them? 
-
-This section could also include prior art, that is, how other the same problem may have already been solved elsewhere.
-
 ## Unresolved Questions
 
-Optional, but suggested for first drafts. What parts of the design are still TBD?
-
-What related issues do you consider out of scope for this RFC that could be addressed in the future independently of the solution that comes out of this RFC?
+- Guide to the Behavioral changes.
+- What kind of change is dropping a minor/patch version of a runtime dependency? (Note that a dev doesn’t get to set the java version of the platform because container config happens independent of module development)
