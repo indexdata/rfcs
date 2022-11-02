@@ -56,10 +56,14 @@ Throughout this RFC we will be discussing about changes in terms of the followin
             - Non-infrastructural changes: eg. modules need Java v17, Node v16, etc.
             - Configurational changes: eg. change to environmental variables.
 
-- Interface Version changes:
+- Interface Version changes(Interface versions mostly describe the communication protocol, behavioral changes are mostly captured at the module version leve):
     - What is a breaking change with respect to a interface version change ?
-        - In UI modules :
-            - 
+        - Changes in the API
+            - Removing and endpoint
+            - Changing the response content type
+            - Adding or removing possible HTTP status code
+        - Changes to the Data model
+            - Removing a required field
 
 #### __Guide to what constitutes as non-breaking changes.__
 
