@@ -33,7 +33,7 @@ Throughout this RFC we will be discussing about changes in terms of the followin
 
 #### __Guide to what constitutes as breaking changes.__
 
-- Module Version(versioned independent of the interface):
+- Module Version changes(versioned independent of the interface):
     - What is a breaking change with respect to a module version change ?
         -  In UI modules :
             - Okapi interface version change - both new minimum version and new interface version
@@ -49,14 +49,17 @@ Throughout this RFC we will be discussing about changes in terms of the followin
         - It is also considered as a breakinch when there is a major change within in an interface
         - If a module stops providing an interface, is also considered as a breaking change
         - Runtime environment changes are also breaking changes.
+    - Things to consider while dealing with Module version changes:
+        - The language here needs to be fleshed out with examples and reasoning, i.e. there is both a functional API (the provided interfaces) and an operational API (the runtime requirements) and changes to either of these must be reflected in a module’s semver. NB: make a general statement about the goal here, and then provide select examples). ()
+        - Three kinds of breaking changes?
+            - Infrastructural change : eg. modules requires Kafka, Postgres, etc.
+            - Non-infrastructural changes: eg. modules need Java v17, Node v16, etc.
+            - Configurational changes: eg. change to environmental variables.
 
-- Things to consider:
-    - The language here needs to be fleshed out with examples and reasoning, i.e. there is both a functional API (the provided interfaces) and an operational API (the runtime requirements) and changes to either of these must be reflected in a module’s semver. NB: make a general statement about the goal here, and then provide select examples). ()
-    - Three kinds of breaking changes?
-        - Infrastructural change : eg. modules requires Kafka, Postgres, etc.
-        - Non-infrastructural changes: eg. modules need Java v17, Node v16, etc.
-        - Configurational changes: eg. change to environmental variables.
-
+- Interface Version changes:
+    - What is a breaking change with respect to a interface version change ?
+        - In UI modules :
+            - 
 
 #### __Guide to what constitutes as non-breaking changes.__
 
@@ -73,6 +76,6 @@ A detailed RFC and ADR is made with guide to recognise and communicate probable 
 
 ## Unresolved Questions
 
-- Guide to the Behavioral changes.
+- How to provide the guide with respect to the Behavioral changes ?
 - What kind of change is dropping a minor/patch version of a runtime dependency? (Note that a dev doesn’t get to set the java version of the platform because container config happens independent of module development)
-- How to provide a clear guidance as to how the proposal should be implemented
+- How to provide a clear guidance as to how the proposal should be implemented?
