@@ -46,7 +46,7 @@ Throughout this RFC we will be discussing about changes in terms of the followin
             - Changing the minor version of an interface is also considered as a breaking change.
             - New operational requirement (e.g. requiring postgres or kafka) is a breaking change (mod-authtoken used to be self contained but now requires DB storage)
             - With respect to Okapi version change a new minimum version change is considered a breaking change as well as a new interface addition is also considered a breaking change
-        - It is also considered as a breakinch when there is a major change within in an interface
+        - It is also considered as a breaking change when there is a major change within in an interface
         - If a module stops providing an interface, is also considered as a breaking change
         - Runtime environment changes are also breaking changes.
     - Things to consider while dealing with Module version changes:
