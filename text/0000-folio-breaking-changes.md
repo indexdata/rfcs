@@ -47,7 +47,7 @@ Throughout this RFC we will be discussing about changes in terms of the followin
             | --------------------------------------- | -------------------------------------  |
             | __New__ minimum version change Okapi    | __Breaking Change__                    |
             | __New__ interface version change Okapi  | __Breaking Change__                    |
-            | __New__ peer dependency                 | __Breaking Change__                    |
+            | __New__ peer dependency addition        | __Breaking Change__                    |
             | __Version Change__ peer dependency      | __Breaking Change__                    |
             | __Public Route__ Changes                | __Breaking Change__                    |
             
