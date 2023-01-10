@@ -30,62 +30,91 @@ Throughout this RFC we will be discussing about changes in terms of the followin
 - What is a breaking change at the __interface__ level?
 - What constitutes as a breaking change in the __behavioral__ level? 
 
+- Three kinds of breaking changes have been defined :
+ |         Changes                 |                Examples                 |
+ | ------------------------------- | --------------------------------------- |
+ | __Infrastructural change__      | A module requires Kafka, Postgres, etc. |
+ | __Non-infrastructural changes__ | Modules need Java v17, Node v16, etc.   |
+ | __Configurational changes__     | Change to environmental variables, etc. |
+  
+ 
 #### __Guide to what constitutes as breaking changes.__
 
 - Module Version changes(versioned independent of the interface):
     - What is a __breaking__ change with respect to a module version change ?
         -  In UI modules :
-            - Okapi interface version change - both __new__ minimum version and __new__ interface version changes are breaking changes
-            - Addition of a new peer dependency is a breaking change
-            - Version change of an existing peer dependency or dependencies is a breaking change
-            - Change in public routes is also a breaking change
+            |          Use Cases                      | Classification (Breaking/Non-breaking) |
+            | --------------------------------------- | -------------------------------------  |
+            | __New__ minimum version change Okapi    | __Breaking Change__                    |
+            | __New__ interface version change Okapi  | __Breaking Change__                    |
+            | __New__ peer dependency                 | __Breaking Change__                    |
+            | __Version Change__ peer dependency      | __Breaking Change__                    |
+            | __Public Route__ Changes                | __Breaking Change__                    |
+            
         - In Backend modules :
-            - Changes to both required and optional interface dependencies - eg. dropping support for an interface version, i.e., replacing __version 3.2__ with __version 3.3__ is a breaking change
-            - Removing __any__ interface is considered a breaking change.
-            - Changing the __minor__ version of an interface is also considered as a breaking change.
-            - __New operational__ requirement (e.g. requiring postgres or kafka) is a breaking change (mod-authtoken used to be self contained but now requires DB storage)
-            - With respect to Okapi version change a __new__ minimum version change is considered a breaking change as well as a new interface addition is also considered a breaking change
-        - It is also considered as a breaking change when there is a __major__ change within an interface
-        - If a module __stops__ providing an interface, is also considered as a breaking change
-        - Runtime environment changes are also breaking changes.
+            |          Use Cases                           | Classification (Breaking/Non-breaking) |
+            | -------------------------------------------- | -------------------------------------  |
+            | __Dropping__ support for interface version   | __Breaking Change__                    |
+            | Removing __any__ interface                   | __Breaking Change__                    |
+            | Changing __minor__ version of an interface   | __Breaking Change__                    |
+            | __New operational__ requirement              | __Breaking Change__                    |
+            | __New__ interface addition w.r.t. Okapi      | __Breaking Change__                    |
+            |  __Major__ change within an interface        | __Breaking Change__                    |
+            | Module __stops__ providing an interface      | __Breaking Change__                    |
+            | __Runtime__ environment changes              | __Breaking Change__                    |
+
     - Things to consider while dealing with Module version changes:
         - The language here needs to be fleshed out with examples and reasoning, i.e. there is both a functional API (the provided interfaces) and an operational API (the runtime requirements) and changes to either of these must be reflected in a module’s semver. NB: make a general statement about the goal here, and then provide select examples). ()
-        - Three kinds of breaking changes?
-            - Infrastructural change : eg. modules requires Kafka, Postgres, etc.
-            - Non-infrastructural changes: eg. modules need Java v17, Node v16, etc.
-            - Configurational changes: eg. change to environmental variables.
-
+        
 - Interface Version changes(Interface versions mostly describe the communication protocol, behavioral changes are mostly captured at the module version leve):
     - What is a __breaking__ change with respect to a interface version change ?
-        - Changes in the API
-            - Removing and endpoint
-            - Changing the response content type
-            - Adding or removing possible HTTP status code
-        - Changes to the Data model
-            - Removing a required field
+        - Changes in the API :
+        |                  Use Case                    | Classification (Breaking/Non-breaking)  |
+        | -------------------------------------------- | --------------------------------------- |
+        | __Removing__ an endpoint                     | __Breaking Change__                     |
+        | __Changing__ the response content type       | __Breaking Change__                     |
+        | __Adding__ or __removing__ HTTP status code  | __Breaking Change__                     |
+
+        - Changes to the Data model:
+        |                  Use Case                    | Classification (Breaking/Non-breaking)  |
+        | -------------------------------------------- | --------------------------------------- |
+        | __Removing__ a required field                | __Breaking Change__                     |
+           
 
 #### __Guide to what constitutes as non-breaking changes.__
 
 - Module Version Change :
     - What is a __non-breaking__ change with respect to a module version change ?
         - In UI Modules :
-            - Addition of a __new direct__ or __development dependency__
-            - Changing __any__ version of an __existing__ direct or development __dependency__
-            - Addition of a __new__ version of an OKAPI interface which is already depended upon
+        |                      Use Case                           | Classification (Breaking/Non-breaking)  |
+        | ------------------------------------------------------- | --------------------------------------- |
+        | Addition of a __new direct__ dependency                 | __Non-Breaking Change__                 |
+        | Addition of a __new development__ dependency            | __Non-Breaking Change__                 |
+        | Changing version of an __existing__ direct dependency   | __Non-Breaking Change__                 |
+        | Changing version of __existing__ development dependency | __Non-Breaking Change__                 |
+        | Addition of __new__ version of existing OKAPI interface | __Non-Breaking Change__                 |
+
         - In Backend Modules :
-            - Changes to both required and optional interface dependencies is considered non breaking in following cases :
-                - Adding a trailing __'0'__ to an interface version, e.g. changing __'3.2.4'__ to __'3.2.4.0'__
-            - Bumping the __minor__ version of a provided interface is not a breaking change
-            - Adding any new interfaces is also not a breaking change
-            - Implementation changes that neither affect interfaces nor operational requirements are considered as non breaking changes, e.g. __adding new code optimisations__
-            - The introduction of new functionality that in no way affects existing functionality or introduces additional operational requirements, e.g. __introduction of a new interface__
+        |                      Use Case                     | Classification (Breaking/Non-breaking)  |
+        | --------------------------------------------------| --------------------------------------- |
+        | Adding a trailing __'0'__ to an interface version | __Non-Breaking Change__                 |
+        | Bumping the __minor__ version of an interface     | __Non-Breaking Change__                 |
+        | Addition of __new__ interface                     | __Non-Breaking Change__                 |
+        | __Adding__ new code optimisations                 | __Non-Breaking Change__                 |
+        | __Adding__ new functionalities                    | __Non-Breaking Change__                 |
+
 - Interface Version Change :
     - What is a __non-breaking__ change with respect to a interface version change ?
-        - Non breaking changes in the __API__
-            - Adding an __endpoint__ to an API is not a breaking change
-        - Non breaking changes to the __Data Model__
-            - Adding a __new__ optional field is not a breaking change
-            - __Removing__ an optional field when additional properties are allowed is not a breaking change.
+        - Non breaking changes in the __API__ :
+        |               Use Case            | Classification (Breaking/Non-breaking)  |
+        | ----------------------------------| --------------------------------------- |
+        | Adding a new  __endpoint__        | __Non-Breaking Change__                 |
+        
+        - Non breaking changes to the __Data Model__ :
+        |               Use Case            | Classification (Breaking/Non-breaking)  |
+        | ----------------------------------| --------------------------------------- |
+        | Adding a __new__ optional field   | __Non-Breaking Change__                 |
+        | __Removing__ an optional field    | __Non-Breaking Change__                 |
 
 ### Clarifications
 
