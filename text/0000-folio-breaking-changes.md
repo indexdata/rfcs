@@ -31,11 +31,11 @@ Throughout this RFC we will be discussing about changes in terms of the followin
 - What constitutes as a breaking change in the __behavioral__ level? 
 
 - Three kinds of breaking changes have been defined :
- |         Changes                 |                Examples                 |
- | ------------------------------- | --------------------------------------- |
- | __Infrastructural change__      | A module requires Kafka, Postgres, etc. |
- | __Non-infrastructural changes__ | Modules need Java v17, Node v16, etc.   |
- | __Configurational changes__     | Change to environmental variables, etc. |
+    |         Changes                 |                Examples                 |
+    | ------------------------------- | --------------------------------------- |
+    | __Infrastructural change__      | A module requires Kafka, Postgres, etc. |
+    | __Non-infrastructural changes__ | Modules need Java v17, Node v16, etc.   |
+    | __Configurational changes__     | Change to environmental variables, etc. |
   
  
 #### __Guide to what constitutes as breaking changes.__
@@ -69,16 +69,16 @@ Throughout this RFC we will be discussing about changes in terms of the followin
 - Interface Version changes(Interface versions mostly describe the communication protocol, behavioral changes are mostly captured at the module version leve):
     - What is a __breaking__ change with respect to a interface version change ?
         - Changes in the API :
-        |                  Use Case                    | Classification (Breaking/Non-breaking)  |
-        | -------------------------------------------- | --------------------------------------- |
-        | __Removing__ an endpoint                     | __Breaking Change__                     |
-        | __Changing__ the response content type       | __Breaking Change__                     |
-        | __Adding__ or __removing__ HTTP status code  | __Breaking Change__                     |
+            |                  Use Case                    | Classification (Breaking/Non-breaking)  |
+            | -------------------------------------------- | --------------------------------------- |
+            | __Removing__ an endpoint                     | __Breaking Change__                     |
+            | __Changing__ the response content type       | __Breaking Change__                     |
+            | __Adding__ or __removing__ HTTP status code  | __Breaking Change__                     |
 
         - Changes to the Data model:
-        |                  Use Case                    | Classification (Breaking/Non-breaking)  |
-        | -------------------------------------------- | --------------------------------------- |
-        | __Removing__ a required field                | __Breaking Change__                     |
+            |                  Use Case                    | Classification (Breaking/Non-breaking)  |
+            | -------------------------------------------- | --------------------------------------- |
+            | __Removing__ a required field                | __Breaking Change__                     |
            
 
 #### __Guide to what constitutes as non-breaking changes.__
@@ -86,35 +86,35 @@ Throughout this RFC we will be discussing about changes in terms of the followin
 - Module Version Change :
     - What is a __non-breaking__ change with respect to a module version change ?
         - In UI Modules :
-        |                      Use Case                           | Classification (Breaking/Non-breaking)  |
-        | ------------------------------------------------------- | --------------------------------------- |
-        | Addition of a __new direct__ dependency                 | __Non-Breaking Change__                 |
-        | Addition of a __new development__ dependency            | __Non-Breaking Change__                 |
-        | Changing version of an __existing__ direct dependency   | __Non-Breaking Change__                 |
-        | Changing version of __existing__ development dependency | __Non-Breaking Change__                 |
-        | Addition of __new__ version of existing OKAPI interface | __Non-Breaking Change__                 |
+            |                      Use Case                           | Classification (Breaking/Non-breaking)  |
+            | ------------------------------------------------------- | --------------------------------------- |
+            | Addition of a __new direct__ dependency                 | __Non-Breaking Change__                 |
+            | Addition of a __new development__ dependency            | __Non-Breaking Change__                 |
+            | Changing version of an __existing__ direct dependency   | __Non-Breaking Change__                 |
+            | Changing version of __existing__ development dependency | __Non-Breaking Change__                 |
+            | Addition of __new__ version of existing OKAPI interface | __Non-Breaking Change__                 |
 
         - In Backend Modules :
-        |                      Use Case                     | Classification (Breaking/Non-breaking)  |
-        | --------------------------------------------------| --------------------------------------- |
-        | Adding a trailing __'0'__ to an interface version | __Non-Breaking Change__                 |
-        | Bumping the __minor__ version of an interface     | __Non-Breaking Change__                 |
-        | Addition of __new__ interface                     | __Non-Breaking Change__                 |
-        | __Adding__ new code optimisations                 | __Non-Breaking Change__                 |
-        | __Adding__ new functionalities                    | __Non-Breaking Change__                 |
+            |                      Use Case                     | Classification (Breaking/Non-breaking)  |
+            | --------------------------------------------------| --------------------------------------- |
+            | Adding a trailing __'0'__ to an interface version | __Non-Breaking Change__                 |
+            | Bumping the __minor__ version of an interface     | __Non-Breaking Change__                 |
+            | Addition of __new__ interface                     | __Non-Breaking Change__                 |
+            | __Adding__ new code optimisations                 | __Non-Breaking Change__                 |
+            | __Adding__ new functionalities                    | __Non-Breaking Change__                 |
 
 - Interface Version Change :
     - What is a __non-breaking__ change with respect to a interface version change ?
         - Non breaking changes in the __API__ :
-        |               Use Case            | Classification (Breaking/Non-breaking)  |
-        | ----------------------------------| --------------------------------------- |
-        | Adding a new  __endpoint__        | __Non-Breaking Change__                 |
+            |               Use Case            | Classification (Breaking/Non-breaking)  |
+            | ----------------------------------| --------------------------------------- |
+            | Adding a new  __endpoint__        | __Non-Breaking Change__                 |
         
         - Non breaking changes to the __Data Model__ :
-        |               Use Case            | Classification (Breaking/Non-breaking)  |
-        | ----------------------------------| --------------------------------------- |
-        | Adding a __new__ optional field   | __Non-Breaking Change__                 |
-        | __Removing__ an optional field    | __Non-Breaking Change__                 |
+            |               Use Case            | Classification (Breaking/Non-breaking)  |
+            | ----------------------------------| --------------------------------------- |
+            | Adding a __new__ optional field   | __Non-Breaking Change__                 |
+            | __Removing__ an optional field    | __Non-Breaking Change__                 |
 
 ### Clarifications
 
