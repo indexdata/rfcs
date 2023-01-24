@@ -6,7 +6,7 @@
 # Folio Breaking Changes
 
 ## Summary
-This RFC's purpose is to deliver to developers and other effected groups general guidlines for determining if a changes within Folio is either a breaking or non-breaking change.
+This RFC's purpose is to deliver to developers and other effected groups general guidlines for determining if a changes within Folio is either a breaking or non-breaking change. 
 
 ## Motivation
 
@@ -14,6 +14,36 @@ This RFC's purpose is to deliver to developers and other effected groups general
 - An extensive guide of those significant changes grouping them into breaking and non-breaking changes.
 
 ## Detailed Explanation/Design
+
+### Terms
+
+For the purposes of this RFC the following terms should be understood by these definitions.
+
+- **Behavioral Change**: A functional change to the implementation which does not correspond to a change in the interface.
+
+- **Breaking Change**: A change that requires a Major Version Change as per Semantic Versioning's requirements.
+
+    - *See [Semantic Versioning 2.0.0](https://semver.org/#semantic-versioning-200)*
+
+- **Data Model Change**: A change in implementation that will require the addition, modification or removal of tables, columns or JSON structures in the storage layer.
+
+- **Direct Dependency (UI)**: A package or module that is explicitly required by a particular project in order to function at runtime.
+
+- **Development Dependency (UI)**: A package or module that is explicitly required by a particular project in order to be built.
+
+- **Interface**: An API described by a FOLIO Module Descriptor.
+
+    - *See [module-descriptor](https://dev.folio.org/guides/module-descriptor/)
+
+- **Implementation**: The code which is invoked when interacting with the API described by the FOLIO Module Descriptor.
+
+- **Operational Change**: A change in an implementation that effects system operators. Such as...
+
+    |         Changes                 |                Examples                         |
+    | ------------------------------- | ----------------------------------------------- |
+    | __Infrastructural change__      | A implementation requires Kafka, Postgres, etc. |
+    | __Non-infrastructural changes__ | implementations need Java v17, Node v16, etc.   |
+    | __Configurational changes__     | Change to environmental variables, etc.         |
 
 ### Specifics
 
@@ -30,47 +60,40 @@ Throughout this RFC we will be discussing changes in terms of the following thre
 
 * We will not address what constitutes as a breaking change in the __behavioral__ level, though this will be an important topic to broach in the future.
 
-- Types of changes which can be considered breaking are:
-    |         Changes                 |                Examples                 |
-    | ------------------------------- | --------------------------------------- |
-    | __Infrastructural change__      | A implementation requires Kafka, Postgres, etc. |
-    | __Non-infrastructural changes__ | implementations need Java v17, Node v16, etc.   |
-    | __Configurational changes__     | Change to environmental variables, etc. |
-
 #### __Implementation Version changes(versioned independent of the interface)__
 
 -  In UI Implementations:
 
-    |          Use Cases                      | __Breaking Change__  | __Non-Breaking__ |
-    | --------------------------------------- | -------------------- | ---------------- |
-    | __New__ minimum version change of an Okapi interface    |  <center>X</center>  |                  |
-    | __New__ interface version change of an Okapi interface  |  <center>X</center>  |                  |
-    | __New__ peer dependency addition        |  <center>X</center>  |                  |
-    | __Version Change__ of a peer dependency      |  <center>X</center>  |                  |
-    | __Public Route__ addition                |    | <center>X</center>                 |
-    | __Public Route__ removal                |  <center>X</center>  |                  |
-    | Addition of a __new direct__ dependency                 |      |<center>X</center>|
-    | Addition of a __new development__ dependency            |      |<center>X</center>|
-    | Changing version of an __existing__ direct dependency   |      |<center>X</center>|
-    | Changing version of __existing__ development dependency |      |<center>X</center>|
-    | Addition of __new__ version of existing OKAPI interface |      |<center>X</center>|
+    |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
+    | --------------------------------------------------------| -------------------- | ------------------ |
+    | __New__ minimum version change of an Okapi interface    |  <center>X</center>  |                    |
+    | __New__ interface version change of an Okapi interface  |  <center>X</center>  |                    |
+    | __New__ peer dependency addition                        |  <center>X</center>  |                    |
+    | __Version Change__ of a peer dependency                 |  <center>X</center>  |                    |
+    | __Public Route__ removal                                |  <center>X</center>  |                    |
+    | __Public Route__ addition                               |                      | <center>X</center> |
+    | Addition of a __new direct__ dependency                 |                      | <center>X</center> |
+    | Addition of a __new development__ dependency            |                      | <center>X</center> |
+    | Changing version of an __existing__ direct dependency   |                      | <center>X</center> |
+    | Changing version of __existing__ development dependency |                      | <center>X</center> |
+    | Addition of __new__ version of existing OKAPI interface |                      | <center>X</center> |
     
 - In Backend Implementations :
-    |          Use Cases                           | __Breaking Change__  | __Non-Breaking__ |
-    | -------------------------------------------- | ---------------------| ---------------  |
-    | __Dropping__ support for interface version   |  <center>X</center>  |                  |
-    | Removing __any__ interface                   |  <center>X</center>  |                  |
-    | Changing __minor__ version of an interface   |  <center>X</center>  |                  |
-    | __New operational__ requirement              |  <center>X</center>  |                  |
-    | __New__ interface addition w.r.t. Okapi      |  <center>X</center>  |                  |
-    |  __Major__ change within an interface        |  <center>X</center>  |                  |
-    | implementation __stops__ providing an interface      |  <center>X</center>  |                  |
-    | __Runtime__ environment changes              |  <center>X</center>  |                  |
-    | Adding a trailing __'0'__ to an interface version |                 |<center>X</center>|
-    | Bumping the __minor__ version of an interface     |                 |<center>X</center>|
-    | Addition of __new__ interface                     |                 |<center>X</center>|
-    | __Adding__ new code optimisations                 |                 |<center>X</center>|
-    | __Adding__ new functionalities                    |                 |<center>X</center>|
+    |          Use Cases                                | __Breaking Change__  | __Non-Breaking__ |
+    | --------------------------------------------------| ---------------------| ---------------  |
+    | __Dropping__ support for interface version        |  <center>X</center>  |                  |
+    | Removing __any__ interface                        |  <center>X</center>  |                  |
+    | Changing __minor__ version of an interface        |  <center>X</center>  |                  |
+    | __New operational__ requirement                   |  <center>X</center>  |                  |
+    | __New__ interface addition w.r.t. Okapi           |  <center>X</center>  |                  |
+    |  __Major__ change within an interface             |  <center>X</center>  |                  |
+    | implementation __stops__ providing an interface   |  <center>X</center>  |                  |
+    | __Runtime__ environment changes                   |  <center>X</center>  |                  |
+    | Adding a trailing __'0'__ to an interface version |                      |<center>X</center>|
+    | Bumping the __minor__ version of an interface     |                      |<center>X</center>|
+    | Addition of __new__ interface                     |                      |<center>X</center>|
+    | __Adding__ new code optimisations                 |                      |<center>X</center>|
+    | __Adding__ new functionalities                    |                      |<center>X</center>|
 
         
 #### __Interface Version changes__ 
@@ -99,7 +122,7 @@ Throughout this RFC we will be discussing changes in terms of the following thre
 
 #### __Risk Scenarios__ 
 
-A detailed RFC and ADR is made with guide to recognise and communicate probable breaking changes to the effected developers, etc, but  after all these efforts, the guide is used by no-one. 
+A detailed RFC and ADR is made with guide to recognise and communicate probable breaking changes to the effected developers, etc, but after all these efforts, the guide is used by no-one. 
 
 ## Rationale and Alternatives
 
@@ -110,3 +133,5 @@ __[TO DO]: Complete this section__
 - How to provide the guidance for versioning Behavioral changes?
 - What kind of change would result from the dropping of a minor/patch version of a runtime dependency? (Note that a dev doesn’t get to set the java version of the platform because container config happens independent of implementation development)
 - How to provide a clear guidance as to how the proposal should be implemented?
+- Changes to public routes expressed within the UI can be considered breaking. This has not been addressed by this RFC.
+- Some changes to shared components within the UI could be considered breaking. This has not been addressed by this RFC.
