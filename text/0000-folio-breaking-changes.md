@@ -1,17 +1,16 @@
 - Start Date: 2022-10-21
-- RFC PR: 
-- FOLIO Issue: 
+- RFC PR: https://github.com/folio-org/rfcs/pull/5
+- FOLIO Issue: N/a
 
 
 # Folio Breaking Changes
 
 ## Summary
-This RFC's purpose is to deliver to developers and other effected groups general guidlines for determining if a changes within Folio is either a breaking or non-breaking change. 
+This RFC's purpose is to deliver to developers and other affected groups general guidelines for determining if a change within FOLIO is either breaking or non-breaking. 
 
 ## Motivation
 
-- To help different Folio implementors know with every release what significant changes have been added.
-- An extensive guide of those significant changes grouping them into breaking and non-breaking changes.
+Help FOLIO developers and other affected groups know, with every release, what breaking changes have been made.
 
 ## Detailed Explanation/Design
 
@@ -25,32 +24,33 @@ For the purposes of this RFC the following terms should be understood by these d
 
     - *See [Semantic Versioning 2.0.0](https://semver.org/#semantic-versioning-200)*
 
+- **Communication Protocol**: 
+
 - **Data Model Change**: A change in implementation that will require the addition, modification or removal of tables, columns or JSON structures in the storage layer.
 
 - **Direct Dependency (UI)**: A package or module that is explicitly required by a particular project in order to function at runtime.
 
 - **Development Dependency (UI)**: A package or module that is explicitly required by a particular project in order to be built.
 
-- **Interface**: An API described by a FOLIO Module Descriptor.
+- **Interface**: An API described by RAML or OpenAPI documentation that has at least one implementation in FOLIO.
 
-    - *See [module-descriptor](https://dev.folio.org/guides/module-descriptor/)
+- **Implementation**: Code which is invoked when interacting with an Interface.
 
-- **Implementation**: The code which is invoked when interacting with the API described by the FOLIO Module Descriptor.
+- **Operational Change**: A change in an implementation that affects system operators. Such as...
 
-- **Operational Change**: A change in an implementation that effects system operators. Such as...
-
-    |         Changes                 |                Examples                         |
-    | ------------------------------- | ----------------------------------------------- |
-    | __Infrastructural change__      | A implementation requires Kafka, Postgres, etc. |
-    | __Non-infrastructural changes__ | implementations need Java v17, Node v16, etc.   |
-    | __Configurational changes__     | Change to environmental variables, etc.         |
+    |         Changes                 |                Examples                              |
+    | ------------------------------- | ---------------------------------------------------- |
+    | __Infrastructural changes__     | An implementation requires Kafka, Postgres, etc.     |
+    | __Non-infrastructural changes__ | An implementations requires Java v17, Node v16, etc. |
+    | __Configurational changes__     | A change to environmental variables, etc.            |
 
 ### Specifics
 
-This RFC aims to outline possible changes made in FOLIO at the implementation or interface level as breaking and non-breaking changes. Because both implementations and interfaces are versioned independently of each other, this document will address breaking and non breaking changes at both the implementation and interface levels.
+This RFC defines changes made in FOLIO at the implementation or interface level as breaking and non-breaking. Not all possible changes can be enumerated here, so this document is not intended to provide an exhaustive list of changes. If a particular change is not covered by this document, developers are encouraged to seek the guidance of the TC. Because both implementations and interfaces are versioned independently of each other, this document will address breaking and non-breaking changes at both the implementation and interface levels.
 
-Additional distinctions must be made between backend vs. UI changes, for implementation versioning, and API vs Data Model changes at the interface level. Behavioral changes, though signigicant and worth addressings, are outside the scope of this RFC. 
+Additional distinctions must be made for implementation and interface changes. For implementation changes we will differentiate between backend and front end. For interface changes we will differentiate between the communication protocol and the data model. 
 
+Behavioral changes, though significant and worth addressing, are outside the scope of this RFC.
 
 #### __What constitutes as a breaking change ?__
 Throughout this RFC we will be discussing changes in terms of the following three categories
@@ -98,7 +98,7 @@ Throughout this RFC we will be discussing changes in terms of the following thre
         
 #### __Interface Version changes__ 
 
-- Changes in the API :
+- Changes in the communication protocal :
     |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
     | -------------------------------------------- | ------------------- | ------------------ |
     | __Removing__ an endpoint                     | <center>X</center>  |                    |
@@ -122,11 +122,14 @@ Throughout this RFC we will be discussing changes in terms of the following thre
 
 #### __Risk Scenarios__ 
 
-A detailed RFC and ADR is made with guide to recognise and communicate probable breaking changes to the effected developers, etc, but after all these efforts, the guide is used by no-one. 
+- A detailed RFC and ADR is made with guidelines to recognise and communicate probable breaking changes to the effected developers, etc, but after all these efforts, the guide is used by no-one 
 
 ## Rationale and Alternatives
 
 __[TO DO]: Complete this section__
+
+- Continue without a common guidence
+- Semantic Versioning
 
 ## Unresolved Questions
 
