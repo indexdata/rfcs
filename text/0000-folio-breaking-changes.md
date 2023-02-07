@@ -41,7 +41,7 @@ For the purposes of this RFC the following terms should be understood by these d
     |         Changes                 |                Examples                              |
     | ------------------------------- | ---------------------------------------------------- |
     | __Infrastructural changes__     | An implementation requires Kafka, Postgres, etc.     |
-    | __Non-infrastructural changes__ | An implementations requires Java v17, Node v16, etc. |
+    | __Non-infrastructural changes__ | An implementation requires Java v17, Node v16, etc. |
     | __Configurational changes__     | A change to environmental variables, etc.            |
 
 ### Specifics
@@ -53,30 +53,36 @@ Additional distinctions must be made for implementation and interface changes. F
 Behavioral changes, though significant and worth addressing, are outside the scope of this RFC.
 
 #### __What constitutes as a breaking change ?__
-Throughout this RFC we will be discussing changes in terms of the following three categories
+Throughout this RFC we will be discussing changes in terms of the following two categories
 
 - What is a breaking change at the __implementation__ level?
 - What is a breaking change at the __interface__ level?
 
-* We will not address what constitutes as a breaking change in the __behavioral__ level, though this will be an important topic to broach in the future.
+We will not address what constitutes as a breaking change in the __behavioral__ level, though this will be an important topic to broach in the future.
 
-#### __Implementation Version changes(versioned independent of the interface)__
+#### __Implementation Version changes__
 
 -  In UI Implementations:
 
     |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
     | --------------------------------------------------------| -------------------- | ------------------ |
-    | __New__ minimum version change of an Okapi interface    |  <center>X</center>  |                    |
-    | __New__ interface version change of an Okapi interface  |  <center>X</center>  |                    |
-    | __New__ peer dependency addition                        |  <center>X</center>  |                    |
-    | __Version Change__ of a peer dependency                 |  <center>X</center>  |                    |
-    | __Public Route__ removal                                |  <center>X</center>  |                    |
-    | __Public Route__ addition                               |                      | <center>X</center> |
-    | Addition of a __new direct__ dependency                 |                      | <center>X</center> |
-    | Addition of a __new development__ dependency            |                      | <center>X</center> |
-    | Changing version of an __existing__ direct dependency   |                      | <center>X</center> |
-    | Changing version of __existing__ development dependency |                      | <center>X</center> |
-    | Addition of __new__ version of existing OKAPI interface |                      | <center>X</center> |
+    | The introduction of a newly consumed Okapi interface        |  <center>X</center>  |                |
+    | The removal of an already consumed Okapi interface      |                      | <center>X</center> | 
+    | The introduction of an additional version of an already consumed OKAPI interface | | <center>X</center> |
+    | The removal of an an an additional version of an already consumed Okapi Interface | <center>X</center> | | 
+    | A change of the minimum version of an Okapi interface already consumed |  <center>X</center> |      |
+    | The addition of a public route                               |                 | <center>X</center> |
+    | The removal of a public route                                |  <center>X</center>  |               |
+    | The change of a public route                                 |  <center>X</center>  |               |
+    | The addition of a new peer dependency                        |  <center>X</center>  |               |
+    | The removal of an existing peer dependency                   |                      |               |
+    | A change in the version of an existing peer dependency       |  <center>X</center>  |               |
+    | The addition of a new direct dependency                      |                 | <center>X</center> |
+    | A removal of an existing direct dependency                   |                 |                    |
+    | A change in the version of an existing direct dependency     |                 | <center>X</center> |
+    | The addition of a new development dependency                 |                 | <center>X</center> |
+    | The removal of an existing development dependency            |                 |                    |
+    | A change in the version of an existing development dependency|                 | <center>X</center> |
     
 - In Backend Implementations :
     |          Use Cases                                | __Breaking Change__  | __Non-Breaking__ |
@@ -98,7 +104,7 @@ Throughout this RFC we will be discussing changes in terms of the following thre
         
 #### __Interface Version changes__ 
 
-- Changes in the communication protocal :
+- Changes in the communication protocol :
     |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
     | -------------------------------------------- | ------------------- | ------------------ |
     | __Removing__ an endpoint                     | <center>X</center>  |                    |
