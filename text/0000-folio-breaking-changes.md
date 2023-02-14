@@ -62,49 +62,49 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 
 #### __Implementation Version changes__
 
+-  OKAPI Interface Consuming Implementations:
+    |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
+    | --------------------------------------------------------| -------------------- | ------------------ |
+    | The introduction of a newly consumed OKAPI interface    |  <center>X</center>  |                    |
+    | The removal of an already consumed OKAPI interface      |                      | <center>X</center> | 
+    | The introduction of an additional version of an already consumed OKAPI interface | | <center>X</center> |
+    | The removal of an an an additional version of an already consumed OKAPI Interface | <center>X</center> | | 
+    | A change of the minimum version of an OKAPI interface already consumed |  <center>X</center> |      |
+
 -  In UI Implementations:
 
     |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
     | --------------------------------------------------------| -------------------- | ------------------ |
-    | The introduction of a newly consumed Okapi interface        |  <center>X</center>  |                |
-    | The removal of an already consumed Okapi interface      |                      | <center>X</center> | 
-    | The introduction of an additional version of an already consumed OKAPI interface | | <center>X</center> |
-    | The removal of an an an additional version of an already consumed Okapi Interface | <center>X</center> | | 
-    | A change of the minimum version of an Okapi interface already consumed |  <center>X</center> |      |
     | The addition of a public route                               |                 | <center>X</center> |
     | The removal of a public route                                |  <center>X</center>  |               |
     | The change of a public route                                 |  <center>X</center>  |               |
     | The addition of a new peer dependency                        |  <center>X</center>  |               |
-    | The removal of an existing peer dependency                   |                      |               |
+    | The removal of an existing peer dependency                   |                      | <center>X</center> |
     | A change in the version of an existing peer dependency       |  <center>X</center>  |               |
     | The addition of a new direct dependency                      |                 | <center>X</center> |
-    | A removal of an existing direct dependency                   |                 |                    |
+    | A removal of an existing direct dependency                   |                 | <center>X</center> |
     | A change in the version of an existing direct dependency     |                 | <center>X</center> |
     | The addition of a new development dependency                 |                 | <center>X</center> |
-    | The removal of an existing development dependency            |                 |                    |
+    | The removal of an existing development dependency            |                 | <center>X</center> |
     | A change in the version of an existing development dependency|                 | <center>X</center> |
-    
-- In Backend Implementations :
+
+- In Backend Implementations:
     |          Use Cases                                | __Breaking Change__  | __Non-Breaking__ |
     | --------------------------------------------------| ---------------------| ---------------  |
-    | __Dropping__ support for interface version        |  <center>X</center>  |                  |
-    | Removing __any__ interface                        |  <center>X</center>  |                  |
-    | Changing __minor__ version of an interface        |  <center>X</center>  |                  |
-    | __New operational__ requirement                   |  <center>X</center>  |                  |
-    | __New__ interface addition w.r.t. Okapi           |  <center>X</center>  |                  |
-    |  __Major__ change within an interface             |  <center>X</center>  |                  |
-    | implementation __stops__ providing an interface   |  <center>X</center>  |                  |
-    | __Runtime__ environment changes                   |  <center>X</center>  |                  |
-    | Adding a trailing __'0'__ to an interface version |                      |<center>X</center>|
-    | Bumping the __minor__ version of an interface     |                      |<center>X</center>|
-    | Addition of __new__ interface                     |                      |<center>X</center>|
-    | __Adding__ new code optimisations                 |                      |<center>X</center>|
-    | __Adding__ new functionalities                    |                      |<center>X</center>|
+    | An operational change                             |  <center>X</center>  |                  |
+    | The addition of a newly provided interface        |                      |<center>X</center>|
+    | A major change within an interface                |  <center>X</center>  |                  |
+    | The removal of a provided interface               |  <center>X</center>  |                  |
+    | A change in the runtime environment               |  <center>X</center>  |                  |
+    | The addition of a trailing '0' to an interface version |                 |<center>X</center>|
+    | The increase of the minor version of a provided interface |              |<center>X</center>|
+    | The decrement of the minor version of a provided interface |<center>X</center>|             |
+    | The addition of in-code optimisations             |                      |<center>X</center>|
 
         
 #### __Interface Version changes__ 
 
-- Changes in the communication protocol :
+- Changes in the communication protocol:
     |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
     | -------------------------------------------- | ------------------- | ------------------ |
     | __Removing__ an endpoint                     | <center>X</center>  |                    |
