@@ -32,6 +32,8 @@ For the purposes of this RFC the following terms should be understood by these d
 
 - **Development Dependency (UI)**: A package or module that is explicitly required by a particular project in order to be built.
 
+- **Endpoint**: The combination of a path, an HTTP Method and both optional and required query parameters.
+
 - **Interface**: An API described by RAML or OpenAPI documentation that has at least one implementation in FOLIO.
 
 - **Implementation**: Code which is invoked when interacting with an Interface.
@@ -41,7 +43,7 @@ For the purposes of this RFC the following terms should be understood by these d
     |         Changes                 |                Examples                              |
     | ------------------------------- | ---------------------------------------------------- |
     | __Infrastructural changes__     | An implementation requires Kafka, Postgres, etc.     |
-    | __Non-infrastructural changes__ | An implementations requires Java v17, Node v16, etc. |
+    | __Non-infrastructural changes__ | An implementation requires Java v17, Node v16, etc. |
     | __Configurational changes__     | A change to environmental variables, etc.            |
 
 ### Specifics
@@ -53,70 +55,82 @@ Additional distinctions must be made for implementation and interface changes. F
 Behavioral changes, though significant and worth addressing, are outside the scope of this RFC.
 
 #### __What constitutes as a breaking change ?__
-Throughout this RFC we will be discussing changes in terms of the following three categories
+Throughout this RFC we will be discussing changes in terms of the following two categories
 
 - What is a breaking change at the __implementation__ level?
 - What is a breaking change at the __interface__ level?
 
-* We will not address what constitutes as a breaking change in the __behavioral__ level, though this will be an important topic to broach in the future.
+We will not address what constitutes as a breaking change in the __behavioral__ level, though this will be an important topic to broach in the future.
 
-#### __Implementation Version changes(versioned independent of the interface)__
+#### __Implementation Version changes__
+
+-  OKAPI Interface Consuming Implementations:
+    |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
+    | --------------------------------------------------------| -------------------- | ------------------ |
+    | The introduction of a newly consumed OKAPI interface    |  <center>X</center>  |                    |
+    | The removal of an already consumed OKAPI interface      |                      | <center>X</center> | 
+    | The introduction of an additional version of an already consumed OKAPI interface | | <center>X</center> |
+    | The removal of an an an additional version of an already consumed OKAPI Interface | <center>X</center> | | 
+    | A change of the minimum version of an OKAPI interface already consumed |  <center>X</center> |      |
 
 -  In UI Implementations:
 
     |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
     | --------------------------------------------------------| -------------------- | ------------------ |
-    | __New__ minimum version change of an Okapi interface    |  <center>X</center>  |                    |
-    | __New__ interface version change of an Okapi interface  |  <center>X</center>  |                    |
-    | __New__ peer dependency addition                        |  <center>X</center>  |                    |
-    | __Version Change__ of a peer dependency                 |  <center>X</center>  |                    |
-    | __Public Route__ removal                                |  <center>X</center>  |                    |
-    | __Public Route__ addition                               |                      | <center>X</center> |
-    | Addition of a __new direct__ dependency                 |                      | <center>X</center> |
-    | Addition of a __new development__ dependency            |                      | <center>X</center> |
-    | Changing version of an __existing__ direct dependency   |                      | <center>X</center> |
-    | Changing version of __existing__ development dependency |                      | <center>X</center> |
-    | Addition of __new__ version of existing OKAPI interface |                      | <center>X</center> |
-    
-- In Backend Implementations :
+    | The addition of a public route                               |                 | <center>X</center> |
+    | The removal of a public route                                |  <center>X</center>  |               |
+    | The change of a public route                                 |  <center>X</center>  |               |
+    | The addition of a new peer dependency                        |  <center>X</center>  |               |
+    | The removal of an existing peer dependency                   |                      | <center>X</center> |
+    | A change in the version of an existing peer dependency       |  <center>X</center>  |               |
+    | The addition of a new direct dependency                      |                 | <center>X</center> |
+    | A removal of an existing direct dependency                   |                 | <center>X</center> |
+    | A change in the version of an existing direct dependency     |                 | <center>X</center> |
+    | The addition of a new development dependency                 |                 | <center>X</center> |
+    | The removal of an existing development dependency            |                 | <center>X</center> |
+    | A change in the version of an existing development dependency|                 | <center>X</center> |
+
+- In Backend Implementations:
     |          Use Cases                                | __Breaking Change__  | __Non-Breaking__ |
     | --------------------------------------------------| ---------------------| ---------------  |
-    | __Dropping__ support for interface version        |  <center>X</center>  |                  |
-    | Removing __any__ interface                        |  <center>X</center>  |                  |
-    | Changing __minor__ version of an interface        |  <center>X</center>  |                  |
-    | __New operational__ requirement                   |  <center>X</center>  |                  |
-    | __New__ interface addition w.r.t. Okapi           |  <center>X</center>  |                  |
-    |  __Major__ change within an interface             |  <center>X</center>  |                  |
-    | implementation __stops__ providing an interface   |  <center>X</center>  |                  |
-    | __Runtime__ environment changes                   |  <center>X</center>  |                  |
-    | Adding a trailing __'0'__ to an interface version |                      |<center>X</center>|
-    | Bumping the __minor__ version of an interface     |                      |<center>X</center>|
-    | Addition of __new__ interface                     |                      |<center>X</center>|
-    | __Adding__ new code optimisations                 |                      |<center>X</center>|
-    | __Adding__ new functionalities                    |                      |<center>X</center>|
+    | An operational change                             |  <center>X</center>  |                  |
+    | The addition of a newly provided interface        |                      |<center>X</center>|
+    | A major change within an interface                |  <center>X</center>  |                  |
+    | The removal of a provided interface               |  <center>X</center>  |                  |
+    | A change in the runtime environment               |  <center>X</center>  |                  |
+    | The addition of a trailing '0' to an interface version |                 |<center>X</center>|
+    | The increase of the minor version of a provided interface |              |<center>X</center>|
+    | The decrement of the minor version of a provided interface |<center>X</center>|             |
+    | The addition of in-code optimisations             |                      |<center>X</center>|
 
         
 #### __Interface Version changes__ 
 
-- Changes in the communication protocal :
-    |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
-    | -------------------------------------------- | ------------------- | ------------------ |
-    | __Removing__ an endpoint                     | <center>X</center>  |                    |
-    | __Changing__ the response content type       | <center>X</center>  |                    |
-    | __Adding__ or __removing__ HTTP status code  | <center>X</center>  |                    |
-    | Adding a new  __endpoint__                   |                     | <center>X</center> |
+- Changes in the communication protocol:
+    |                  Use Case                        | __Breaking Change__ |  __Non-Breaking__  |
+    | ------------------------------------------------ | ------------------- | ------------------ |
+    | The removal of an endpoint                       | <center>X</center>  |                    |
+    | The addition of a new endpoint                   |                     | <center>X</center> |
+    | The change of an existing endpoint's path        | <center>X</center>  |                    |
+    | The addition of an optional query parameter to an existing endpoint  | | <center>X</center> |
+    | The addition of a required query parameter to an existing endpoint   | <center>X</center> | |
+    | The removal of an existing endpoint's query parameter  | <center>X<center> |                |
+    | The change of an existing endpoint's HTTP method | <center>X</center>  |                    |
+    | The change of an existing endpoint response's content type | <center>X</center> |           |
+    | The change of an existing endpoint request's content type | <center>X</center> |            |
+    | The addition or removal of an HTTP status code from an existing endpoint|<center>X</center>||
+    
 
 - Changes to the Data model:
     |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
     | -------------------------------------------- | ------------------- | ------------------ |
-    | __Removing__ a required field                |  <center>X</center> |                    |
-    | Adding a __new__ optional field              |                     | <center>X</center> |
-    | __Removing__ an optional field               |                     | <center>X</center> |
+    | The removal of a required field              |  <center>X</center> |                    |
+    | The addition of a new optional field         |                     | <center>X</center> |
+    | The removal an optional field                |                     | <center>X</center> |
            
 ### Clarifications
 
 - Interfaces only represent the communication protocol, i.e. the shape of a request/response to/from a given endpoint. Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change. 
-
 
 ## Risks and Drawbacks
 
