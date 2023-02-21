@@ -32,6 +32,8 @@ For the purposes of this RFC the following terms should be understood by these d
 
 - **Development Dependency (UI)**: A package or module that is explicitly required by a particular project in order to be built.
 
+- **Endpoint**: The combination of a path, an HTTP Method and both optional and required query parameters.
+
 - **Interface**: An API described by RAML or OpenAPI documentation that has at least one implementation in FOLIO.
 
 - **Implementation**: Code which is invoked when interacting with an Interface.
@@ -105,24 +107,30 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 #### __Interface Version changes__ 
 
 - Changes in the communication protocol:
-    |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
-    | -------------------------------------------- | ------------------- | ------------------ |
-    | __Removing__ an endpoint                     | <center>X</center>  |                    |
-    | __Changing__ the response content type       | <center>X</center>  |                    |
-    | __Adding__ or __removing__ HTTP status code  | <center>X</center>  |                    |
-    | Adding a new  __endpoint__                   |                     | <center>X</center> |
+    |                  Use Case                        | __Breaking Change__ |  __Non-Breaking__  |
+    | ------------------------------------------------ | ------------------- | ------------------ |
+    | The removal of an endpoint                       | <center>X</center>  |                    |
+    | The addition of a new endpoint                   |                     | <center>X</center> |
+    | The change of an existing endpoint's path        | <center>X</center>  |                    |
+    | The addition of an optional query parameter to an existing endpoint  | | <center>X</center> |
+    | The addition of a required query parameter to an existing endpoint   | <center>X</center> | |
+    | The removal of an existing endpoint's query parameter  | <center>X<center> |                |
+    | The change of an existing endpoint's HTTP method | <center>X</center>  |                    |
+    | The change of an existing endpoint response's content type | <center>X</center> |           |
+    | The change of an existing endpoint request's content type | <center>X</center> |            |
+    | The addition or removal of an HTTP status code from an existing endpoint|<center>X</center>||
+    
 
 - Changes to the Data model:
     |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
     | -------------------------------------------- | ------------------- | ------------------ |
-    | __Removing__ a required field                |  <center>X</center> |                    |
-    | Adding a __new__ optional field              |                     | <center>X</center> |
-    | __Removing__ an optional field               |                     | <center>X</center> |
+    | The removal of a required field              |  <center>X</center> |                    |
+    | The addition of a new optional field         |                     | <center>X</center> |
+    | The removal an optional field                |                     | <center>X</center> |
            
 ### Clarifications
 
 - Interfaces only represent the communication protocol, i.e. the shape of a request/response to/from a given endpoint. Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change. 
-
 
 ## Risks and Drawbacks
 
