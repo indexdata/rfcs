@@ -10,7 +10,7 @@ This RFC's purpose is to deliver to developers and other affected groups general
 
 ## Motivation
 
-Help FOLIO developers and other affected groups know, with every release, what breaking changes have been made.
+The community currently has differing approaches to versioning, and this has lead to undesirable situations in the development process. In an attempt to reconcile these differing approaches to versioning, it is necessary to put forward a standard guidance on what is and is not a breaking change. This RFS seeks to help FOLIO developers and other affected groups know, with every release, what breaking changes have been made.
 
 ## Detailed Explanation/Design
 
@@ -18,13 +18,15 @@ Help FOLIO developers and other affected groups know, with every release, what b
 
 For the purposes of this RFC the following terms should be understood by these definitions.
 
-- **Behavioral Change**: A functional change to the implementation which does not correspond to a change in the interface.
+- **Behavioral Change**: A functional change to the implementation which does not correspond to a change in the interface.  
+
+    - For example, if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change.
 
 - **Breaking Change**: A change that requires a Major Version Change as per Semantic Versioning's requirements.
 
     - *See [Semantic Versioning 2.0.0](https://semver.org/#semantic-versioning-200)*
 
-- **Communication Protocol**: 
+- **Communication Protocol**: the shape of a request or response either to or from a given endpoint
 
 - **Data Model Change**: A change in implementation that will require the addition, modification or removal of tables, columns or JSON structures in the storage layer.
 
@@ -34,7 +36,7 @@ For the purposes of this RFC the following terms should be understood by these d
 
 - **Endpoint**: The combination of a path, an HTTP Method and both optional and required query parameters.
 
-- **Interface**: An API described by RAML or OpenAPI documentation that has at least one implementation in FOLIO.
+- **Interface**: An API described by RAML or OpenAPI documentation that has at least one implementation in FOLIO. Interfaces only represent the communication protocol.
 
 - **Implementation**: Code which is invoked when interacting with an Interface.
 
@@ -122,33 +124,23 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
     
 
 - Changes to the Data model:
-    |                  Use Case                    | __Breaking Change__ |  __Non-Breaking__  |
-    | -------------------------------------------- | ------------------- | ------------------ |
-    | The removal of a required field              |  <center>X</center> |                    |
-    | The addition of a new optional field         |                     | <center>X</center> |
-    | The removal an optional field                |                     | <center>X</center> |
+    |                  Use Case                    | __Breaking Change__ | __Non-Breaking__  |
+    | -------------------------------------------- | ------------------ | ------------------ |
+    | The addition of a required field             | <center>X</center> |                    |
+    | The removal of a required field              | <center>X</center> |                    |
+    | The change of a required field               | <center>X</center> |                    |
+    | The addition of a new optional field         |                    | <center>X</center> |
+    | The change of a new optional field           | <center>X</center> |                    |
+    | The removal an optional field                | <center>X</center> |                    |
            
 ### Clarifications
 
-- Interfaces only represent the communication protocol, i.e. the shape of a request/response to/from a given endpoint. Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change. 
+- Interfaces only represent the communication protocol, i.e. the shape of a request/response to/from a given endpoint. 
+- Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change.
 
-## Risks and Drawbacks
+## Unresolved Topics
 
-#### __Risk Scenarios__ 
-
-- A detailed RFC and ADR is made with guidelines to recognise and communicate probable breaking changes to the effected developers, etc, but after all these efforts, the guide is used by no-one 
-
-## Rationale and Alternatives
-
-__[TO DO]: Complete this section__
-
-- Continue without a common guidence
-- Semantic Versioning
-
-## Unresolved Questions
-
-- How to provide the guidance for versioning Behavioral changes?
-- What kind of change would result from the dropping of a minor/patch version of a runtime dependency? (Note that a dev doesn’t get to set the java version of the platform because container config happens independent of implementation development)
-- How to provide a clear guidance as to how the proposal should be implemented?
-- Changes to public routes expressed within the UI can be considered breaking. This has not been addressed by this RFC.
+- Versioning of behavioral changes.
+- This RFC offers guidence on what is or is not a breaking change, but does not address how our community should implement this guidence.
 - Some changes to shared components within the UI could be considered breaking. This has not been addressed by this RFC.
+- Search query syntax is not a part of the FOLIO interface specification, and therefore changes to an implementation's processing of query parameters are considered behavioral for the purposes of this RFC and will not be addressed. It is worth noting that search query syntax perhaps should be explicitly addressed by a FOLIO interface specification.
