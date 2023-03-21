@@ -147,5 +147,5 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 
 - Interfaces only represent the communication protocol, i.e. the shape of a request/response to/from a given endpoint. 
 - Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change.
-- A field which is required must not also designate a default value, though JSON Schema allows for a property to both be required and  designate a default value. With this understanding, a default value can only be applied to a optional field.
+- A field which is required must not also designate a default value, though JSON Schema allows for a property to both be required and  designate a default value. With this understanding, a default value can only be applied to an optional field.
 - When a module is renamed, it is considered a new module. Renaming modules should be avoided.
