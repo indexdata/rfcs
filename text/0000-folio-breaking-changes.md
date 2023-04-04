@@ -18,7 +18,9 @@ The community currently has differing approaches to versioning, and this has lea
 - This RFC offers guidence on what is or is not a breaking change, but does not address how our community should implement this guidence.
 - Some changes to shared components within the UI could be considered breaking. This has not been addressed by this RFC.
 - Search query syntax is not a part of the FOLIO interface specification, and therefore changes to an implementation's processing of query parameters are considered behavioral for the purposes of this RFC and will not be addressed. It is worth noting that search query syntax perhaps should be explicitly addressed by a FOLIO interface specification.
-- The versioning of Edge Modules is out of scope, except in so far as they are acting as a client implementation. In those instances the section concerning "OKAPI Interface Consuming Implementations" applies to edge modules.
+- The versioning of edge modules is out of scope, except in so far as they are acting as a client implementation. In those instances the section concerning "OKAPI Interface Consuming Implementations" applies to edge modules.
+- Though changes in messaging can have a breaking impact on message consumers, because our messaging implementation does not version messages, guidance for breaking changes related to messaging is out of scope for this RFC.
+- The FOLIO project has taken several differing approaches to the loading of reference data. Because of this it is difficult to offer succinct guidance on how changes to reference data should affect an implementation version. Until such a time that the approach to reference data has been standardized across the project, guidance for breaking changes related to reference data will be considered out of scope.
 
 ## Detailed Explanation/Design
 
