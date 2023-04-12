@@ -12,6 +12,16 @@ This RFC's purpose is to deliver to developers and other affected groups general
 
 The community currently has differing approaches to versioning, and this has lead to undesirable situations in the development process. In an attempt to reconcile these differing approaches to versioning, it is necessary to put forward a standard guidance on what is and is not a breaking change. This RFS seeks to help FOLIO developers and other affected groups know, with every release, what breaking changes have been made.
 
+## Out of Scope
+
+- This document designates some changes as "behavioral changes", and does address the versioning of such changes.
+- This RFC offers guidence on what is or is not a breaking change, but does not address how our community should implement this guidence.
+- Some changes to shared components within the UI could be considered breaking. This has not been addressed by this RFC.
+- Search query syntax is not a part of the FOLIO interface specification, and therefore changes to an implementation's processing of query parameters are considered behavioral for the purposes of this RFC and will not be addressed. It is worth noting that search query syntax perhaps should be explicitly addressed by a FOLIO interface specification.
+- The versioning of edge modules is out of scope, except in so far as they are acting as a client implementation. In those instances the section concerning "OKAPI Interface Consuming Implementations" applies to edge modules.
+- Though changes in messaging can have a breaking impact on message consumers, because our messaging implementation does not version messages, guidance for breaking changes related to messaging is out of scope for this RFC.
+- The FOLIO project has taken several differing approaches to the loading of reference data. Because of this it is difficult to offer succinct guidance on how changes to reference data should affect an implementation version. Until such a time that the approach to reference data has been standardized across the project, guidance for breaking changes related to reference data will be considered out of scope.
+
 ## Detailed Explanation/Design
 
 ### Terms
@@ -33,6 +43,8 @@ For the purposes of this RFC the following terms should be understood by these d
 - **Direct Dependency (UI)**: A package or module that is explicitly required by a particular project in order to function at runtime.
 
 - **Development Dependency (UI)**: A package or module that is explicitly required by a particular project in order to be built.
+
+- **Edge Modules**: see [Edge API](https://wiki.folio.org/display/FOLIOtips/Edge+APIs).
 
 - **Endpoint**: The combination of a path, an HTTP Method and both optional and required query parameters.
 
@@ -82,13 +94,13 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
     | The addition of a public route                               |                 | <center>X</center> |
     | The removal of a public route                                |  <center>X</center>  |               |
     | The change of a public route                                 |  <center>X</center>  |               |
-    | The addition of a new peer dependency                        |  <center>X</center>  |               |
-    | The removal of an existing peer dependency                   |                      | <center>X</center> |
+    | The addition of a peer dependency                            |  <center>X</center>  |               |
+    | The removal of an existing peer dependency                   |                 | <center>X</center> |
     | A change in the version of an existing peer dependency       |  <center>X</center>  |               |
-    | The addition of a new direct dependency                      |                 | <center>X</center> |
+    | The addition of a direct dependency                          |                 | <center>X</center> |
     | A removal of an existing direct dependency                   |                 | <center>X</center> |
     | A change in the version of an existing direct dependency     |                 | <center>X</center> |
-    | The addition of a new development dependency                 |                 | <center>X</center> |
+    | The addition of a development dependency                     |                 | <center>X</center> |
     | The removal of an existing development dependency            |                 | <center>X</center> |
     | A change in the version of an existing development dependency|                 | <center>X</center> |
 
@@ -112,35 +124,30 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
     |                  Use Case                        | __Breaking Change__ |  __Non-Breaking__  |
     | ------------------------------------------------ | ------------------- | ------------------ |
     | The removal of an endpoint                       | <center>X</center>  |                    |
-    | The addition of a new endpoint                   |                     | <center>X</center> |
+    | The addition of a endpoint                       |                     | <center>X</center> |
     | The change of an existing endpoint's path        | <center>X</center>  |                    |
     | The addition of an optional query parameter to an existing endpoint  | | <center>X</center> |
     | The addition of a required query parameter to an existing endpoint   | <center>X</center> | |
-    | The removal of an existing endpoint's query parameter  | <center>X<center> |                |
+    | The removal of an existing endpoint's query parameter | <center>X<center> |                 |
     | The change of an existing endpoint's HTTP method | <center>X</center>  |                    |
     | The change of an existing endpoint response's content type | <center>X</center> |           |
     | The change of an existing endpoint request's content type | <center>X</center> |            |
     | The addition or removal of an HTTP status code from an existing endpoint|<center>X</center>||
     
 
-- Changes to the Data model:
+- Changes to the data model:
     |                  Use Case                    | __Breaking Change__ | __Non-Breaking__  |
     | -------------------------------------------- | ------------------ | ------------------ |
     | The addition of a required field             | <center>X</center> |                    |
     | The removal of a required field              | <center>X</center> |                    |
     | The change of a required field               | <center>X</center> |                    |
-    | The addition of a new optional field         |                    | <center>X</center> |
-    | The change of a new optional field           | <center>X</center> |                    |
+    | The addition of a optional field             |                    | <center>X</center> |
+    | The change of an optional field              | <center>X</center> |                    |
     | The removal an optional field                | <center>X</center> |                    |
            
 ### Clarifications
 
 - Interfaces only represent the communication protocol, i.e. the shape of a request/response to/from a given endpoint. 
 - Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change.
-
-## Unresolved Topics
-
-- Versioning of behavioral changes.
-- This RFC offers guidence on what is or is not a breaking change, but does not address how our community should implement this guidence.
-- Some changes to shared components within the UI could be considered breaking. This has not been addressed by this RFC.
-- Search query syntax is not a part of the FOLIO interface specification, and therefore changes to an implementation's processing of query parameters are considered behavioral for the purposes of this RFC and will not be addressed. It is worth noting that search query syntax perhaps should be explicitly addressed by a FOLIO interface specification.
+- A field which is required must not also designate a default value, though JSON Schema allows for a property to both be required and  designate a default value. With this understanding, a default value can only be applied to an optional field.
+- When a module is renamed, it is considered a new module. Renaming modules should be avoided.
