@@ -1,6 +1,7 @@
 - Start Date: 2022-10-21
 - RFC PR: https://github.com/folio-org/rfcs/pull/5
 - FOLIO Issue: N/a
+- In Public Review
 
 
 # Folio Breaking Changes
