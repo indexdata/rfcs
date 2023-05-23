@@ -61,6 +61,8 @@ For the purposes of this RFC the following terms should be understood by these d
     | __Non-infrastructural changes__ | An implementation requires Java v17, Node v16, etc. |
     | __Configurational changes__     | A change to environmental variables, etc.            |
 
+- **System Interface**: Interfaces only consumed by OKAPI, typically designated by a `_` prefix.
+
 ### Specifics
 
 This RFC defines changes made in FOLIO at the implementation or interface level as breaking and non-breaking. Not all possible changes can be enumerated here, so this document is not intended to provide an exhaustive list of changes. If a particular change is not covered by this document, developers are encouraged to seek the guidance of the TC. Because both implementations and interfaces are versioned independently of each other, this document will address breaking and non-breaking changes at both the implementation and interface levels.
@@ -152,3 +154,5 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 - Behavior changes are part of a implementation’s version, e.g. if circulation adds additional actions when receiving a request at /checkout such as sending notifications or checking fees/fines but continues to send the same response, the interface version will not change.
 - A field which is required must not also designate a default value, though JSON Schema allows for a property to both be required and  designate a default value. With this understanding, a default value can only be applied to an optional field.
 - When a module is renamed, it is considered a new module. Renaming modules should be avoided.
+- Any changes to the provided System Interface is considered a breaking change.
+
