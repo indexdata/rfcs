@@ -7,15 +7,16 @@
 # Folio Breaking Changes
 
 ## Summary
-This RFC's purpose is to deliver to developers and other affected groups general guidelines for determining if a change within FOLIO is either breaking or non-breaking. 
+
+The primary purpose to track breaking changes is to allow operators and developers to respond appropriately to these changes when they occur. This RFC's purpose is to deliver to developers and other affected groups general guidelines for determining if a change within FOLIO is either breaking or non-breaking. 
 
 ## Motivation
 
-The community currently has differing approaches to versioning, and this has lead to undesirable situations in the development process. In an attempt to reconcile these differing approaches to versioning, it is necessary to put forward a standard guidance on what is and is not a breaking change. This RFS seeks to help FOLIO developers and other affected groups know, with every release, what breaking changes have been made.
+The community currently has differing approaches to versioning, and this has lead to undesirable situations in the development process. In an attempt to reconcile these differing approaches to versioning, it is necessary to put forward a standard guidance on what is and is not a breaking change. This RFC seeks to help FOLIO developers and other affected groups know, with every release, what breaking changes have been made.
 
 ## Out of Scope
 
-- This document designates some changes as "behavioral changes", and does address the versioning of such changes.
+- This document designates some changes as "behavioral changes", and addresses the versioning of such changes.
 - This RFC offers guidence on what is or is not a breaking change, but does not address how our community should implement this guidence.
 - Some changes to shared components within the UI could be considered breaking. This has not been addressed by this RFC.
 - Search query syntax is not a part of the FOLIO interface specification, and therefore changes to an implementation's processing of query parameters are considered behavioral for the purposes of this RFC and will not be addressed. It is worth noting that search query syntax perhaps should be explicitly addressed by a FOLIO interface specification.
@@ -39,8 +40,6 @@ For the purposes of this RFC the following terms should be understood by these d
 
 - **Communication Protocol**: the shape of a request or response either to or from a given endpoint
 
-- **Data Model Change**: A change in implementation that will require the addition, modification or removal of tables, columns or JSON structures in the storage layer.
-
 - **Direct Dependency (UI)**: A package or module that is explicitly required by a particular project in order to function at runtime.
 
 - **Development Dependency (UI)**: A package or module that is explicitly required by a particular project in order to be built.
@@ -53,13 +52,7 @@ For the purposes of this RFC the following terms should be understood by these d
 
 - **Implementation**: Code which is invoked when interacting with an Interface.
 
-- **Operational Change**: A change in an implementation that affects system operators. Such as...
-
-    |         Changes                 |                Examples                              |
-    | ------------------------------- | ---------------------------------------------------- |
-    | __Infrastructural changes__     | An implementation requires Kafka, Postgres, etc.     |
-    | __Non-infrastructural changes__ | An implementation requires Java v17, Node v16, etc. |
-    | __Configurational changes__     | A change to environmental variables, etc.            |
+- **Operational Change**: A change in an implementation that affects system operators, such as requiring Kafka, postgres, java, node, env variables, etc... 
 
 - **System Interface**: Interfaces only consumed by OKAPI, typically designated by a `_` prefix.
 
@@ -84,11 +77,17 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 -  OKAPI Interface Consuming Implementations:
     |          Use Cases                                      | __Breaking Change__  | __Non-Breaking__   |
     | --------------------------------------------------------| -------------------- | ------------------ |
-    | The introduction of a newly consumed OKAPI interface    |  <center>X</center>  |                    |
-    | The removal of an already consumed OKAPI interface      |                      | <center>X</center> | 
+    | The introduction of a newly consumed OKAPI interface *  |  <center>X</center>  |                    |
+    | The removal of an already consumed OKAPI interface *   |                      | <center>X</center> | 
     | The introduction of an additional version of an already consumed OKAPI interface | | <center>X</center> |
     | The removal of an an an additional version of an already consumed OKAPI Interface | <center>X</center> | | 
-    | A change of the minimum version of an OKAPI interface already consumed |  <center>X</center> |      |
+    | A change of the minimum version of an OKAPI interface already consumed * |  <center>X</center> |      |
+
+\*Introduction of a newly consumed OKAPI interface is considered to be breaking because it will inhibit a consumer's ability to operate in a FOLIO deployement that does not provide the interface which the consumer requires.
+
+\* Removal of an already consumed OKAPI interface is considered to be non breaking because this change represents a relaxation in the consumers requirements of the FOLIO deployement.
+
+\* A minor decrease in the minimum version of an OKAPI interface already consumed may not be a breaking change
 
 -  In UI Implementations:
 
