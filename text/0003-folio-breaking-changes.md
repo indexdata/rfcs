@@ -37,6 +37,7 @@ For the purposes of this RFC the following terms should be understood by these d
 - **Breaking Change**: A change that requires a Major Version Change as per Semantic Versioning's requirements.
 
     - *See [Semantic Versioning 2.0.0](https://semver.org/#semantic-versioning-200)*
+    - In general changes will be considered to be breaking if the change would cause dependant systems (i.e. build tools, infrastructure or other modules) to no longer work.
 
 - **Communication Protocol**: the shape of a request or response either to or from a given endpoint
 
@@ -114,7 +115,6 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
     | A major change within an interface                |  <center>X</center>  |                  |
     | The removal of a provided interface               |  <center>X</center>  |                  |
     | A change in the runtime environment               |  <center>X</center>  |                  |
-    | The addition of a trailing '0' to an interface version |                 |<center>X</center>|
     | The increase of the minor version of a provided interface |              |<center>X</center>|
     | The decrement of the minor version of a provided interface |<center>X</center>|             |
     | The addition of in-code optimisations             |                      |<center>X</center>|
@@ -154,4 +154,5 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 - A field which is required must not also designate a default value, though JSON Schema allows for a property to both be required and  designate a default value. With this understanding, a default value can only be applied to an optional field.
 - When a module is renamed, it is considered a new module. Renaming modules should be avoided.
 - Any changes to the provided System Interface is considered a breaking change.
+- Perhaps counter intuitively, "The addition or removal of an HTTP status code from an existing endpoint" is considered to be a breaking change, because if a client has built deliberate behaviour on the basis of getting a specific status code, it is likely this client will need to adapt now that it has gone.
 
