@@ -155,4 +155,4 @@ We will not address what constitutes as a breaking change in the __behavioral__ 
 - When a module is renamed, it is considered a new module. Renaming modules should be avoided.
 - Any changes to the provided System Interface is considered a breaking change.
 - Perhaps counter intuitively, "The addition or removal of an HTTP status code from an existing endpoint" is considered to be a breaking change, because if a client has built deliberate behaviour on the basis of getting a specific status code, it is likely this client will need to adapt now that it has gone.
-
+- The section "Changes to the data model" was created under the assumption that a same representation of data is used for both read and write operations. We acknowledge that this is not always the case, though it is and should be the case in most situations.
