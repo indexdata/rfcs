@@ -13,12 +13,12 @@ FOLIO relies on a tenant aware extendable microservice system. It is highly conf
 
 FOLIO had no strict guidelines for developers, how and where to store the configuration values. This led to a situation where different approaches where developed by different developer teams.
 This makes it difficult for implementers, administrators and users to configure the system appropriate, as they may have to search the documentation how to read or write these configuration values.
-Basically there are two competing concepts where to store the values: distributed in the owning modules or centralized is a special module that offers a configuration store for other modules.
+Basically there are two competing concepts where to store the values: distributed in the owning modules or centralized in a special module that offers a configuration store for other modules.
 This RFC shall give guidelines for developers, where configuration values shall be set.
 
 ## Detailed Explanation/Design
 
-This RFC deals with configurations that configure the behaviour of the Folio tenant. Among all different kinds of configurations, this RFC does not deal with the following configurations, as their location and method to set/get them should not be changed:
+This RFC deals with configurations that configure the behaviour of the Folio tenant. Among all different kinds of configurations, this RFC does not deal with the following configurations, as their location and method to set/get them shall not be changed:
 
 * Settings stored in Okapi's /_/env APIs.
 * Settings stored in Infrastructure (Kubernetes / Rancher) config maps and secrets.
@@ -31,14 +31,14 @@ mod-configuration is deprecated due to security problems since March 2022. It sh
 
 ### Distributed configuration is preferred
 
-Distributed configuration means that each module stores its configuration values itself, and offers API endpoints to query and store these values. Distributed configuration in a microservice architecture has some advantages:
+Distributed configuration means, that each module stores its configuration values itself, and offers API endpoints to query and store these values. Distributed configuration in a microservice architecture has some advantages:
 
 * The modules can validate the values according to format and dependencies
 * Modules do not depend on a configuration module, hence a better separation of microservices can be achieved
 * Since all API endpoints have to be documented, a basic documentation of possible configuration variables is mandatory
 * Configuration values can be cached, since no other module can change values.
 * Access to configuration values can effectively controlled by permissions defined in the module.
-* Write-only configuration values are possible, like credentials. The module can offer other operators than reading values like comparing hashes (possible in central configuration too?)
+* Write-only configuration values are possible, like for credentials. The module can offer other operators than reading values like comparing hashes (possible in central configuration too?)
 * Modules can handle upgrade of configuration variable names or values during module upgrades more flexible
 
 Even when there are also some drawbacks on distributed configuration, it is the preferred way to configure backend modules in FOLIO.
@@ -49,8 +49,8 @@ mod-settings solves the security problems of mod-configuration. It is the prefer
 
 Centralized configuration can be used for:
 
-* Non-sensitive information, that are used by more than one module or are completely independent of any module like locale settings
-* Settings that are specific to a user
+* Non-sensitive information, that are used by more than one module or are completely independent of any module. One example are locale settings.
+* Configurations that are specific to a user.
 
 While these configurations can also be stored in a module, the developer can decide where these values shall be stored.
 
@@ -62,7 +62,7 @@ mod-configuration will be removed in the release following the Quesnelia release
 
 ## Risks and Drawbacks
 
-Migrations from old mod-configuration can fail, and therefore tenant upgrades may fail. 
+Migrations from old mod-configuration can fail, and therefore tenant upgrades may fail.
 
 ## Rationale and Alternatives
 
