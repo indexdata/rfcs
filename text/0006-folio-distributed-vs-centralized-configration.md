@@ -7,13 +7,13 @@
 
 ## Summary
 
-FOLIO relies on a tenant aware extendable microservice system. It is highly configurable and adoptable on all kind of requirements. This RFC shall give a guideline for developers, where configurations shall be put.
+Drop mod-configuration module. Favour distributed configuration over centralized configuration, provide guidelines for storage of configuration values.
 
 ## Motivation
 
-FOLIO had no strict guidelines for developers, how and where to store the configuration values. This led to a situation where different approaches where developed by different developer teams.
+FOLIO relies on a tenant aware extendable microservice system. It is highly configurable and adoptable on all kind of requirements. FOLIO had no strict guidelines for developers, how and where to store the configuration values. This led to a situation where different approaches where developed by different developer teams.
 This makes it difficult for implementers, administrators and users to configure the system appropriate, as they may have to search the documentation how to read or write these configuration values.
-Basically there are two competing concepts where to store the values: distributed in the owning modules or centralized in a special module that offers a configuration store for other modules.
+Basically there are two competing concepts where to store the values: distributed in the owning modules or centralized in a special module that offers a configuration store for other modules. There exist two solutions for centralized configurations: mod-settings and mod-configuration (deprecated, to be dropped).
 This RFC shall give guidelines for developers, where configuration values shall be set.
 
 ## Detailed Explanation/Design
@@ -25,9 +25,9 @@ This RFC deals with configurations that configure the behaviour of the Folio ten
 * Settings stored in module container environment variables.
 * Settings stored in the stripes front-end (stripes.config.js, etc.)
 
-### mod-configuration will be dropped until Quesnelia release
+### mod-configuration will be dropped until Ramsons release
 
-mod-configuration is deprecated due to security problems since March 2022. It shall not be used any more to add new configuration variables. Modules still using mod-configuration have to move to other solutions until the Quesnelia release.
+mod-configuration is deprecated due to security problems since March 2022. It shall not be used any more to add new configuration variables. Modules still using mod-configuration have to move to other solutions until the Ramsons release.
 
 ### Distributed configuration is preferred
 
@@ -47,22 +47,23 @@ Even when there are also some drawbacks on distributed configuration, it is the 
 
 mod-settings solves the security problems of mod-configuration. It is the preferred module if configuration variables shall be stored centrally. It is not recommended to develop specialized modules for other central configuration store.
 
-Centralized configuration can be used for:
+Centralized configuration can only be used for either:
 
-* Non-sensitive information, that are used by more than one module or are completely independent of any module. One example are locale settings.
+* Non-sensitive information, that are used by many modules or are completely independent of any module. One example are locale settings.
 * Configurations that are specific to a user.
 
-While these configurations can also be stored in a module, the developer can decide where these values shall be stored.
+While these configurations can also be stored decentralized in a module, the developer can decide where these values shall be stored.
 
 ### Migration
 
 Since most modules already store configuration values in a distributed way, only some cases need to be addressed.
-For locale properties and other properties still residing exclusively in mod-configuration, the access to these properties has to be moved to the mod-settings API until the Quesnelia release. Therefore a mod-configuration module offering only READ and DELETE APIs will run in Quesnelia and the modules still using mod-configuration have to transfer their properties to mod-settings or to a distributed configuration. Migrated configurations in mod-configuration have to be deleted. This can be done during module upgrades.
-mod-configuration will be removed in the release following the Quesnelia release.
+For locale properties and other properties still residing exclusively in mod-configuration, the access to these properties has to be moved to the module (distributed configuration, prferred) or to the mod-settings (centralized configuration, not preferred) until the Ramsons release. Therefore a mod-configuration module offering only READ and DELETE APIs will run in Ramsons and the modules still using mod-configuration have to transfer their properties to mod-settings or to a distributed configuration. Migrated configurations in mod-configuration have to be deleted. This can be done during module upgrades.
+mod-configuration will be removed in the release following the Ramsons release.
 
 ## Risks and Drawbacks
 
 Migrations from old mod-configuration can fail, and therefore tenant upgrades may fail.
+Distributed configuration requires more developer effort than central configuration.
 
 ## Rationale and Alternatives
 
@@ -77,6 +78,3 @@ A pure distributed configuration has the following drawbacks:
 
 Therefore a distributed configuration with some exceptions has been considered.
 
-## Unresolved Questions
-
-Future developments like consortia extensions and the discussion about application formalization may need to update this RFC to clarify how configurations are stored.
