@@ -2,7 +2,7 @@
   - [Julian Ladisch](julian.ladisch@gbv.de)
   - [Florian Gleixner](Florian.Gleixner@lrz.de)
 - RFC PRs: 
-  - PRELIMINARY REVIEW: https://github.com/folio-org/rfcs/pull/24
+  - PRELIMINARY REVIEW: https://github.com/folio-org/rfcs/pull/23
   - DRAFT REVIEW: TBD
   - PUBLIC REVIEW: TBD
   - FINAL REVIEW: TBD
