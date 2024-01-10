@@ -19,7 +19,7 @@ With this RFC, we are proposing extending the FOLIO Officially Supported Technol
 
 We think that Go has compelling characteristics that make it a solid and safe choice for building enterprise applications and network services. 
 
-Specifically for FOLIO development, we believe that Go will complement the list of already supported backend languages and that [many conscious decisions in the design of the language and its core library](https://go.dev/talks/2012/splash.article) make it a perfect fit for FOLIO microservices-inspired architecture and open, community-first collaborative project structure. 
+Specifically for FOLIO development, we believe that Go will complement the list of already supported backend languages and that [many conscious decisions in the design of the language and its core library](https://go.dev/talks/2012/splash.article) make it well-suited for FOLIO microservices-inspired architecture and open, community-first collaborative project structure. 
 
 ## Detailed Explanation/Design
 
