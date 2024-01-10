@@ -49,7 +49,7 @@ Additionally, as history of FOLIO development shows, there exists high level of 
 
 ## Rationale and Alternatives
 
-As explained in the design section, Go is a programming language dedicated to writing backend web services and as such is a perfect fit for FOLIO's microservices-inspired architecture. It is also a language that is increasingly popular with community-driven open source projects thanks to it simplicity and familiar syntax but without the performance tradeoffs that are typical to dynamic or scripting languages.
+As explained in the design section, Go is a programming language well-suited to writing backend web services and, as such, is a perfect fit for FOLIO's microservices-inspired architecture. It is also an increasingly popular language with community-driven open-source projects thanks to its simplicity and familiar syntax but without the performance tradeoffs typical to dynamic or scripting languages.
 
 Go's excellent AOT compilation support puts it ahead of Java for building systems that comprise of many small, containerized workloads.
 
