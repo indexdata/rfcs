@@ -3,7 +3,7 @@
   - [Jakub Skoczen](jakub@indexdata.com)
   - [Mike Taylor](mike@indexdata.com)
 - RFC PRs: 
-  - PRELIMINARY REVIEW: TBD
+  - PRELIMINARY REVIEW: https://github.com/folio-org/rfcs/pull/25
   - DRAFT REVIEW: TBD
   - PUBLIC REVIEW: TBD
   - FINAL REVIEW: TBD
