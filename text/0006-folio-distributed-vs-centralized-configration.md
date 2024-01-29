@@ -73,7 +73,7 @@ Distributed configuration requires more developer effort than central configurat
 
 Both central and distributed configurations were discussed. 
 While pure central configuration offers easier access to the complete configuration of a tenant, this is not desireable since:
-* it is a antipattern in a microservice architecture 
+* it is an antipattern in a microservice architecture ([shared persistence/data ownership](https://arxiv.org/ftp/arxiv/papers/1908/1908.04101.pdf))
 * validation of values is not possible
 * differentiating configuration data and application data is not easy: are circulation rules configuration data or application data?
 
