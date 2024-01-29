@@ -78,7 +78,7 @@ While pure central configuration offer easier access to the complete configurati
 * differentiating configuration data and application data is not easy: are circulation rules configuration data or application data?
 
 A pure distributed configuration has the following drawbacks:
-* for centrally used configuration values, like locale settings, a owning module has to be found. It may not be intuitive finding out, which module holds these configurations.
+* for centrally used configuration values, like locale settings, an owning module has to be found. It may not be intuitive finding out, which module holds these configurations.
 
 Therefore a distributed configuration with some exceptions has been considered.
 
