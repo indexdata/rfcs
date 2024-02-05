@@ -31,7 +31,7 @@ This RFC deals with configurations that configure the behaviour of the Folio ten
 * Settings stored in module container environment variables.
 * Settings stored in the stripes front-end (stripes.config.js, etc.)
 
-### mod-configuration will be dropped until Ramsons release
+### Use of mod-configuration will be discontinued until Ramsons release
 
 mod-configuration is deprecated due to security problems since March 2022. It shall not be used any more to add new configuration variables. Modules still using mod-configuration have to move to other solutions until the Ramsons release.
 
