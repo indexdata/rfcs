@@ -85,7 +85,7 @@ Therefore a distributed configuration with some exceptions has been considered.
 ## Timing
 
 Since most modules already store configuration values in a distributed way, only some cases need to be addressed.
-For locale properties and other properties still residing exclusively in mod-configuration, the access to these properties has to be moved to the module (distributed configuration, preferred) or to the mod-settings (centralized configuration, not preferred) until the Ramsons release. Therefore a mod-configuration module offering only READ and DELETE APIs will run in Ramsons and the modules still using mod-configuration have to transfer their properties to mod-settings or to a distributed configuration. Migrated configurations in mod-configuration have to be deleted. This can be done during module upgrades.
+For locale properties and other properties still residing exclusively in mod-configuration, the access to these properties has to be moved to the module (distributed configuration, preferred) or to the mod-settings (centralized configuration, not preferred) until the Ramsons release. Therefore a mod-configuration module offering only READ and DELETE APIs will run in Ramsons and the modules still using mod-configuration have to transfer their properties to mod-settings or to a distributed configuration. Migrated configurations in mod-configuration have to be deleted. This has to be done during module upgrades.
 mod-configuration will be removed in the release following the Ramsons release.
 
 ## Unresolved Questions
