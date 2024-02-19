@@ -4,7 +4,7 @@
   - [Mike Taylor](mike@indexdata.com)
 - RFC PRs: 
   - PRELIMINARY REVIEW: https://github.com/folio-org/rfcs/pull/25
-  - DRAFT REVIEW: https://github.com/folio-org/rfcs/pull/25
+  - DRAFT REVIEW: https://github.com/folio-org/rfcs/pull/27
   - PUBLIC REVIEW: TBD
   - FINAL REVIEW: TBD
 - Outcome: (Leave this blank.  Will eventually be either ACCEPTED or REJECTED)
