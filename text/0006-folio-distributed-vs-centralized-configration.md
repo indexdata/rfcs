@@ -3,7 +3,7 @@
   - [Florian Gleixner](Florian.Gleixner@lrz.de)
 - RFC PRs: 
   - PRELIMINARY REVIEW: https://github.com/folio-org/rfcs/pull/23
-  - DRAFT REVIEW: TBD
+  - DRAFT REVIEW: https://github.com/folio-org/rfcs/pull/28
   - PUBLIC REVIEW: TBD
   - FINAL REVIEW: TBD
 - Outcome: (Leave this blank.  Will eventually be either ACCEPTED or REJECTED)
