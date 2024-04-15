@@ -4,7 +4,7 @@
 - RFC PRs: 
   - PRELIMINARY REVIEW: https://github.com/folio-org/rfcs/pull/23
   - DRAFT REVIEW: https://github.com/folio-org/rfcs/pull/28
-  - PUBLIC REVIEW: TBD
+  - PUBLIC REVIEW: https://github.com/folio-org/rfcs/pull/28
   - FINAL REVIEW: TBD
 - Outcome: (Leave this blank.  Will eventually be either ACCEPTED or REJECTED)
 
@@ -31,9 +31,9 @@ This RFC deals with configurations that configure the behaviour of the Folio ten
 * Settings stored in module container environment variables.
 * Settings stored in the stripes front-end (stripes.config.js, etc.)
 
-### Use of mod-configuration will be discontinued until Ramsons release
+### Use of mod-configuration will be discontinued after Ramsons release
 
-mod-configuration is deprecated due to security problems since March 2022. It shall not be used any more to add new configuration variables. Modules still using mod-configuration have to move to other solutions until the Ramsons release.
+mod-configuration is deprecated due to security problems since March 2022. It shall not be used any more to add new configuration variables. Modules still using mod-configuration have to move to other solutions after the Ramsons release.
 
 ### Distributed configuration is preferred
 
@@ -85,8 +85,8 @@ Therefore a distributed configuration with some exceptions has been considered.
 ## Timing
 
 Since most modules already store configuration values in a distributed way, only some cases need to be addressed.
-For locale properties and other properties still residing exclusively in mod-configuration, the access to these properties has to be moved to the module (distributed configuration, preferred) or to the mod-settings (centralized configuration, not preferred) until the Ramsons release. Therefore a mod-configuration module offering only READ and DELETE APIs will run in Ramsons and the modules still using mod-configuration have to transfer their properties to mod-settings or to a distributed configuration. Migrated configurations in mod-configuration have to be deleted. This has to be done during module upgrades.
-mod-configuration will be removed in the release following the Ramsons release.
+For locale properties and other properties still residing exclusively in mod-configuration, the access to these properties has to be moved to the module (distributed configuration, preferred) or to the mod-settings (centralized configuration, not preferred) after the Ramsons release. Therefore a mod-configuration module offering only READ and DELETE APIs will run in Sunflower and the modules still using mod-configuration have to transfer their properties to mod-settings or to a distributed configuration. Migrated configurations in mod-configuration have to be deleted. This has to be done during module upgrades.
+mod-configuration will be removed in the release following the Sunflower release.
 
 ## Unresolved Questions
 
