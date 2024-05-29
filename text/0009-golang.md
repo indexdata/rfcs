@@ -45,6 +45,12 @@ According to [GitHub statistics](https://madnight.github.io/githut/#/pull_reques
 
 Introducing Go as one of the supported backend technologies involves the same general concerns as introducing any new technology into FOLIO. The biggest potential risk is the increased development and maintenance complexity as some new FOLIO backend modules will be created with Go which is not immediately well known to existing FOLIO backend developers that have primarily Java background. As explained in the previous section, however, this risk is contained because of the design of Go which, while being a different language, has many points of similarity to Java. It should be noted that while Go is an OOP language and supports both interfaces and generics, it doesn't support inheritance, only extension through composition is supported.
 
+The top three challenges from the Go Developer Survey 2024 H1 are:
+
+* Learning how to write Go effectively
+* The verbosity of error handling
+* The Go ecosystem is missing libraries of frameworks I need
+
 Another drawback worth mentioning is that a subset of the shared library functionality used by Java modules must be implemented in the form of a shared Go library. The library can, however, be kept simple and include only the most fundamental functionality, similar to [folio-vertx-lib](https://github.com/folio-org/folio-vertx-lib).
 
 Additionally, as history of FOLIO development shows, there exists high level of affinity between specific teams of developers and particular modules and domains. This affinity often results in siloing and can create barriers preventing wider collaboration between various development teams. This siloing exists even within Java-only usage in FOLIO (vert.x vs Spring) because of the high reliance on web programming frameworks. Development in Go has less or no reliance on frameworks -- for instance it's entirely possible to develop FOLIO modules with only Go standard library, Postgres client library and OpenAPI parser library. This more lightweight approach to development can ease some of the cross-module development barriers in FOLIO. 
