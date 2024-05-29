@@ -53,7 +53,9 @@ The top three challenges from the Go Developer Survey 2024 H1 are:
 
 Another drawback worth mentioning is that a subset of the shared library functionality used by Java modules must be implemented in the form of a shared Go library. The library can, however, be kept simple and include only the most fundamental functionality, similar to [folio-vertx-lib](https://github.com/folio-org/folio-vertx-lib).
 
-Additionally, as history of FOLIO development shows, there exists high level of affinity between specific teams of developers and particular modules and domains. This affinity often results in siloing and can create barriers preventing wider collaboration between various development teams. This siloing exists even within Java-only usage in FOLIO (vert.x vs Spring) because of the high reliance on web programming frameworks. Development in Go has less or no reliance on frameworks -- for instance it's entirely possible to develop FOLIO modules with only Go standard library, Postgres client library and OpenAPI parser library. This more lightweight approach to development can ease some of the cross-module development barriers in FOLIO. 
+Additionally, as history of FOLIO development shows, there exists high level of affinity between specific teams of developers and particular modules and domains. This affinity often results in siloing and can create barriers preventing wider collaboration between various development teams. This siloing exists even within Java-only usage in FOLIO (vert.x vs Spring) because of the high reliance on web programming frameworks. Development in Go has less or no reliance on frameworks -- for instance it's entirely possible to develop FOLIO modules with only Go standard library, Postgres client library and OpenAPI parser library. This more lightweight approach to development can ease some of the cross-module development barriers in FOLIO.
+
+Another risk flagged during the RFC review is that the FOLIO community mostly has only has Java developers today and it might struggle to attract Go developers in the future and that would make supporting Go modules over the long term harder to achieve
 
 ## Rationale and Alternatives
 
