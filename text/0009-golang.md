@@ -13,7 +13,7 @@
 
 ## Summary
 
-With this RFC, we are proposing extending the FOLIO Officially Supported Technologies [list](https://wiki.folio.org/display/TC/Officially+Supported+Technologies) with the [Go](https://go.dev/) programming language for backend development.
+With this RFC, we are proposing to evaluate the Go language through an incubation project and eventually extend the FOLIO Officially Supported Technologies [list](https://wiki.folio.org/display/TC/Officially+Supported+Technologies) with the [Go](https://go.dev/) programming language for backend development. 
 
 ## Motivation
 
