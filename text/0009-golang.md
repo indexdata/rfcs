@@ -43,7 +43,7 @@ According to [GitHub statistics](https://madnight.github.io/githut/#/pull_reques
 
 ## Risks and Drawbacks
 
-Introducing Go as one of the supported backend technologies involves the same general concerns as introducing any new technology into FOLIO. The biggest potential risk is the increased development and maintenance complexity as some new FOLIO backend modules will be created with Go which is not immediately well known to existing FOLIO backend developers that have primarily Java background. As explained in the previous section, however, this risk is contained because of the design of Go which, while being a different language, has many points of similarity to Java.
+Introducing Go as one of the supported backend technologies involves the same general concerns as introducing any new technology into FOLIO. The biggest potential risk is the increased development and maintenance complexity as some new FOLIO backend modules will be created with Go which is not immediately well known to existing FOLIO backend developers that have primarily Java background. As explained in the previous section, however, this risk is contained because of the design of Go which, while being a different language, has many points of similarity to Java. It should be noted that while Go is an OOP language and supports both interfaces and generics, it doesn't support inheritance, only extension through composition is supported.
 
 Another drawback worth mentioning is that a subset of the shared library functionality used by Java modules must be implemented in the form of a shared Go library. The library can, however, be kept simple and include only the most fundamental functionality, similar to [folio-vertx-lib](https://github.com/folio-org/folio-vertx-lib).
 
