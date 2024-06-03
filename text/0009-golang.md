@@ -67,12 +67,12 @@ As such there's no direct alternative to Go available in the FOLIO ecosystem.
 
 ## Timing
 
-We propose that Go be added as an incubating technology in Quesnelia with the attempt to execute a pilot project. The pilot will serve as the technology preview to validate Go's fit for FOLIO backend development. While it might be a good idea to directly compare Java and Go by re-implementing an existing module it should be stressed that during the pilot phase, any new module written in Go will be considered strictly a proof-of-concept and there's no guarantee the module will remain a part of the FOLIO release. 
+We propose that Go be added as an incubating technology in Ramsons with the attempt to execute a pilot project. The pilot will serve as the technology preview to validate Go's fit for FOLIO backend development. While it might be a good idea to directly compare Java and Go by re-implementing an existing module it should be stressed that during the pilot phase, any new module written in Go will be considered strictly a proof-of-concept and there's no guarantee the module will remain a part of the FOLIO release. 
 
-In the case Go is deemed unsuitable for FOLIO development, any modules developed in Go will be removed from future FOLIO versions, and Go will not be accepted as a supported technology.
+In the case Go is deemed unsuitable for FOLIO development, the PoC module developed in Go will be removed from future FOLIO versions, and Go will not be accepted as a supported technology.
 
-In the case Go is deemed suitable for FOLIO backend development, it will be accepted to the official technology list starting from the Ramsons release.
+In the case Go is deemed suitable for FOLIO backend development, it will be accepted to the official technology list starting from the Sunflower release.
 
-We do not expect this RFC and Go's admission to the officially supported technology list to have any impact on release planning for Quesnelia or Ramsons or cause any additional workload for development teams. Index Data DevOps will provide initial support with regard to the CI/CD pipelines to development teams wanting to build FOLIO modules in Go.
+We do not expect this RFC and Go's admission to the officially supported technology list to have any impact on release planning for Ramsons or Sumflower or cause any additional workload for development teams. Index Data DevOps will provide initial support with regard to the CI/CD pipelines to development teams wanting to build FOLIO modules in Go.
 
 ## Unresolved Questions
